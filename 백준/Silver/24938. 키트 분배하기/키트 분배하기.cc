@@ -2,26 +2,22 @@
 
 int main(void)
 {
-    int n;
+    int n, temp, avg;
     std::cin >> n;
     int array[n];
-    long long avg = 0;
+
+    avg = 0, temp = 0;
     for (int i = 0; i < n; i++) {
         std::cin >> array[i];
-        avg += array[i];
+        temp += array[i];
+        avg += temp / n;
+        temp %= n;
     }
-    avg /= n;
 
-    int result = 0;
+    long long result = 0;
     for (int i = 0; i < n; i++) {
-        if (array[i] > avg) {
-            result += array[i] - avg;
-            array[i+1] += array[i] - avg;
-        }
-        else if (array[i] < avg) {
-            result += avg - array[i];
-            array[i+1] -= avg - array[i];
-        }
+        result += abs(array[i] - avg);
+        array[i+1] += array[i] - avg;
         array[i] = avg;
     }
     
