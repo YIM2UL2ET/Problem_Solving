@@ -6,12 +6,8 @@ int solve(int n)
 {   
     if (n == 1) return 1;
     else if (ary[n-1] != 0) return ary[n-1];
-    else {
-        int temp = 1;
-        for (int i = 0; n-i*2 > 1; i++) temp += solve(i+1);
-        ary[n-1] = temp;
-        return ary[n-1];
-    }
+    for (int i = 0; n-i*2 > 1; i++) ary[n-1] += solve(i+1);
+    return ++ary[n-1];
 }
 
 int main(void)
