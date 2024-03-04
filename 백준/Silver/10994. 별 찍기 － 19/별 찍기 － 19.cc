@@ -17,9 +17,9 @@ void func2(int n, int m)
     std::cout << "\n";
 }
 
-void func(int n, int m, char* commend)
+void func(int n, int m, bool isFront)
 {
-    if (commend == "front") {
+    if (isFront) {
         func1(n, m);
         func2(n, m);
     }
@@ -36,11 +36,10 @@ void star(int n, int m)
         std::cout << "\n";
     }
     else {
-        func(n, m, "front");
+        func(n, m, true);
         star(n-1, m+1);
-        func(n, m, "back");
+        func(n, m, false);
     }
-
 }
 
 int main(void)
