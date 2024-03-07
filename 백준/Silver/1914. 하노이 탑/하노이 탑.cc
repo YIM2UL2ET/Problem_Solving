@@ -3,7 +3,7 @@
 std::string FindValue(int n)
 {
     std::string result = "1";
-    for (int i = 0, j = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         for (int j = 0; j < result.size(); j++) {
             result[j] = (result[j] - '0') * 2 + '0';
             if (result[j] > '9') {
