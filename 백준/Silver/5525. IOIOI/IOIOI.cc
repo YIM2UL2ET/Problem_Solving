@@ -1,36 +1,35 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 
 int main(void) {
-  char ch;
   int N, M;
-  queue<char> Pn, target;
+  string S;
 
-  cin >> N >> M;
-
-  for (int i = 0; i < N * 2 + 1; i++) {
-    cin >> ch;
-    target.push(ch);
-
-    if (i % 2 == 0) {
-      Pn.push('I');
-    } else {
-      Pn.push('O');
-    }
-  }
+  cin >> N >> M >> S;
 
   int ans = 0;
-  if (Pn == target) {
-    ans++;
-  }
-  for (int i = 2 * N + 1; i < M; i++) {
-    cin >> ch;
-    target.pop();
-    target.push(ch);
-
-    if (target == Pn) {
-        ans++;
+  int oddI = 0, oddO = 0;
+  int evenI = 0, evenO = 0;
+  
+  for (int i = 0; i < M; i++) {
+    if (i % 2 == 0) {
+      if (S[i] == 'I') {
+        evenI++;
+        evenO = 0;
+        if(evenI >= N + 1 && oddO >= N) ans++;
+      } else {
+        evenO++;
+        evenI = 0;
+      }
+    } else {
+      if (S[i] == 'I') {
+        oddI++;
+        oddO = 0;
+        if(oddI >= N + 1 && evenO >= N) ans++;
+      } else {
+        oddO++;
+        oddI = 0;
+      }
     }
   }
 
