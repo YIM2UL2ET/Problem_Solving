@@ -2,39 +2,34 @@
 #include <vector>
 using namespace std;
 
-int N;
-vector<int> leftCard;
-vector<int> rightCard;
-vector<vector<int>> dp;
-
-int func(int l, int r) {
-  if (l == N || r == N)
-    return 0;
-  else if (dp[l][r] == 0) {
-    dp[l][r] = max(func(l + 1, r), func(l + 1, r + 1));
-
-    if (leftCard[l] > rightCard[r]) {
-      dp[l][r] = max(dp[l][r], func(l, r + 1) + rightCard[r]);
-    }
-  }
-  return dp[l][r];
-}
-
 int main(void) {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+
+  int N;
   cin >> N;
 
-  leftCard.resize(N);
-  rightCard.resize(N);
-  dp.resize(N, vector<int>(N));
+  vector<int> leftCard(N);
+  vector<int> rightCard(N);
+  vector<vector<int>> dp(N + 1, vector<int>(N + 1));
 
-  for (int &card : leftCard) {
-    cin >> card;
+  for (int i = 0; i < N; i++) {
+    cin >> leftCard[i];
   }
-  for (int &card : rightCard) {
-    cin >> card;
+  for (int i = 0; i < N; i++) {
+    cin >> rightCard[i];
   }
 
-  cout << func(0, 0);
+  for (int r = 1; r <= N; r++) {
+    for (int l = 1; l <= N; l++) {
+      dp[l][r] = max(dp[l - 1][r], dp[l - 1][r - 1]);
+      if (leftCard[N - l] > rightCard[N - r]) {
+        dp[l][r] = max(dp[l][r], dp[l][r - 1] + rightCard[N - r]);
+      }
+    }
+  }
+
+  cout << dp[N][N];
 
   return 0;
 }
