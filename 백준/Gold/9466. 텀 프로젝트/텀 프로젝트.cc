@@ -10,24 +10,25 @@ vector<bool> isVisit;
 int dfs(unordered_set<int> &localVst, int n) {
   if (isVisit[n]) return 0;
 
-  int target = 0;
+  int result = 0;
   isVisit[n] = true;
   localVst.insert(n);
 
   if (localVst.find(edge[n]) == localVst.end()) {
-    target = dfs(localVst, edge[n]);
+    result = dfs(localVst, edge[n]);
   } else {
-    target = edge[n];
+    result = edge[n];
   }
 
-  if (localVst.find(target) != localVst.end()) {
+  if (result > 0) {
     isTeam[n] = true;
-    if (target == n) {
-      target = 0;
+    if (result != n) {
+      return result;
+    } else {
+      return 0;
     }
   }
-
-  return target;
+  return 0;
 }
 
 void solve(void) {
