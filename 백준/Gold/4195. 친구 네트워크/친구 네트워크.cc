@@ -1,6 +1,5 @@
 #include <iostream>
 #include <unordered_map>
-#include <vector>
 using namespace std;
 
 unordered_map<string, string> root;
