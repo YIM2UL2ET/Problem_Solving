@@ -14,12 +14,8 @@ int getParent(int n) {
 void unionParent(int a, int b) {
     a = getParent(a);
     b = getParent(b);
-
-    if (a < b) {
-        parent[b] = a;
-    } else {
-        parent[a] = b;
-    }
+    if (a < b) parent[b] = a;
+    else parent[a] = b;
 }
 
 int main() {
@@ -43,19 +39,15 @@ int main() {
     }
     
     string ans = "YES";
-    if (M > 0) {
-        int city, root;
+    int city, root;
 
+    cin >> city;
+    root = getParent(city);
+    for (int i = 1; i < M; i++) {
         cin >> city;
-        root = getParent(city);
-        for (int i = 1; i < M; i++) {
-            cin >> city;
-            if (root != getParent(city)) {
-                ans = "NO";
-            }
+        if (root != getParent(city)) {
+            ans = "NO";
         }
-    } else {
-        ans = "NO";
     }
 
     cout << ans;
